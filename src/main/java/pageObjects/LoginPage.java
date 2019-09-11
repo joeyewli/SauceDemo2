@@ -13,9 +13,13 @@ public class LoginPage extends BasePage {
     @FindBy (id="password")
     private WebElement password;
     @FindBy(xpath = "//*[@value = 'LOGIN']")
-    private WebElement login;
-    @FindBy (tagName = "a")
-    private List<WebElement> links;
+    private WebElement loginBtn;
+    @FindBy (className= "login_logo")
+    private WebElement loginLogo;
+    @FindBy (className = "bot_column")
+    private WebElement botImage;
+    @FindBy (xpath = "//*[@data-test = 'error']")
+    private WebElement errorMessage;
 
     private String loginURL = "https://www.saucedemo.com/index.html";
 
@@ -49,17 +53,30 @@ public class LoginPage extends BasePage {
 
 
     public InventoryPage pressLoginBtn() {
-        login.click();
+        loginBtn.click();
         return new InventoryPage();
     }
     public InventoryPage loginAsStandardUser(){
         navigateToHomePage();
-        username.sendKeys("standard_user");
+//        username.sendKeys("standard_user");
+        username.sendKeys("problem_user");
         password.sendKeys("secret_sauce");
-        login.click();
+        loginBtn.click();
         return new InventoryPage();
     }
     public String getLoginURL(){
         return loginURL;
+    }
+
+    public boolean getLoginLogo() {
+        return loginLogo.isDisplayed();
+    }
+
+    public boolean getRobotLogo() {
+        return botImage.isDisplayed();
+    }
+
+    public String getErrorMessage(){
+        return errorMessage.getText();
     }
 }

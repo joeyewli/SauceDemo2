@@ -7,7 +7,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageObjects.InventoryPage;
 import pageObjects.LoginPage;
-import sun.rmi.runtime.Log;
+
+import static org.junit.Assert.assertTrue;
 
 public class InventoryTest extends BasePage {
     LoginPage loginPage;
@@ -45,4 +46,21 @@ public class InventoryTest extends BasePage {
         // Write code here that turns the phrase above into concrete actions
         inventoryPage.checkLinks();
     }
+
+    @Then("testing")
+    public void testing() throws Throwable{
+    System.out.println(inventoryPage.test());
+    }
+
+    @Then("(.*) is in the footer")
+    public void doesFooterContains(String footer) throws Throwable{
+        boolean flag =inventoryPage.doesFooterContains(footer);
+        assertTrue(flag);
+    }
+    @Then("all images are displayed")
+    public void areAllImagesDisplayed(){
+        boolean flag = inventoryPage.areImagesDisplayed();
+        assertTrue(flag);
+    }
+
 }

@@ -15,7 +15,10 @@ import java.util.List;
 public class InventoryPage extends BasePage {
     @FindBy(tagName = "a")
     private List<WebElement> links;
-
+    @FindBy(className = "footer")
+    private WebElement footer;
+    @FindBy(className = "inventory_item_img")
+    private List<WebElement> inventoryImages;
 
     public InventoryPage(){
         PageFactory.initElements(driver, this );
@@ -56,7 +59,25 @@ public class InventoryPage extends BasePage {
 
     public void showlinks() {
         for (int i = 0; i<links.size();i++){
-            System.out.println(links.get(i));
+           // System.out.println(links.get(i));
         }
+    }
+    public String test(){
+        return footer.getText();
+    }
+    public boolean doesFooterContains(String text){
+        if (footer.getText().contains(text)){
+            return true;
+        }
+        return false;
+    }
+    public boolean areImagesDisplayed(){
+        Iterator<WebElement> it = inventoryImages.iterator();
+        while(it.hasNext()){
+            if (!it.next().isDisplayed()){
+                return false;
+            }
+        }
+        return true;
     }
 }

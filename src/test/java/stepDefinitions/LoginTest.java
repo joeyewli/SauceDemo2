@@ -8,6 +8,7 @@ import cucumber.api.java.BeforeStep;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import pageObjects.InventoryPage;
 import pageObjects.LoginPage;
@@ -77,34 +78,40 @@ public class LoginTest extends BasePage {
     public void i_can_see_swaglabs_login_logo()throws Throwable{
         // Write code here that turns the phrase above into concrete actions
         System.out.println("swags logo");
+        boolean flag = loginPage.getLoginLogo();
+        assertTrue(flag);
     }
 
     @Then("I can see the robot logo")
-    public void i_can_see_the_robot_logo() {
+    public void i_can_see_the_robot_logo() throws Throwable{
         // Write code here that turns the phrase above into concrete actions
         System.out.println("robot logo");
+        boolean flag = loginPage.getRobotLogo();
+        assertTrue(flag);
     }
 
-    @Then("the tab shows Swag Labs")
-    public void the_tab_shows_Swag_Labs() {
+    @Then("the tab shows (.*)")
+    public void the_tab_shows_Swag_Labs(String title) throws Throwable {
         System.out.println("tab swag labs");
+        assertEquals(title,driver.getTitle());
     }
 
     @Given("I am a standard_user")
-    public void i_am_a_standard_user() {
+    public void i_am_a_standard_user() throws Throwable {
         System.out.println("I am a standard user");
     }
 
     @Then("I will remain at the Login page")
-    public void i_will_remain_at_the_Login_page() {
+    public void i_will_remain_at_the_Login_page() throws Throwable {
         assertEquals(getURL(),getURL());
     }
 
     @Then("I will get an error message (.*)")
-    public void i_will_get_an_error_message(String error) {
+    public void i_will_get_an_error_message(String error) throws Throwable{
         // Write code here that turns the phrase above into concrete actions
         //assertTrue(contains(error));
-        System.out.println("Error");
+        System.out.println("Error Message");
+        assertTrue(loginPage.getErrorMessage().contains(error));
     }
 
 
