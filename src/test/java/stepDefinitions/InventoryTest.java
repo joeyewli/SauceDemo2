@@ -42,7 +42,7 @@ public class InventoryTest extends BasePage {
     }
 
     @Then("all links works")
-    public void all_links_works() {
+    public  void all_links_works() {
         // Write code here that turns the phrase above into concrete actions
         inventoryPage.checkLinks();
     }

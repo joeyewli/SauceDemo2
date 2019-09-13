@@ -7,7 +7,7 @@ Feature: InventoryPage
     And try to Login
     Then I will login into https://www.saucedemo.com/inventory.html
 
-  @links
+  @links @now
   Scenario: Check all links are working
     Given I am login on the inventory page
     When I click on all the links
