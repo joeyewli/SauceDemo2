@@ -1,4 +1,4 @@
-
+@login
 Feature: Login
   @login
   Scenario: User can log into saucedemo.com

@@ -7,6 +7,39 @@
     <groupId>AutomationProject</groupId>
     <artifactId>SauceDemo2</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>cucumber-jvm-example</projectName>
+                            <!-- output directory for the generated report -->
+                            <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
+                            <!-- optional, defaults to outputDirectory if not specified -->
+                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -36,5 +69,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 
 </project>
