@@ -70,12 +70,12 @@ public class LoginTest extends BasePage {
 
 
     @When("I check the homepage")
-    public void i_check_the_homepage() throws Throwable {
+    public void i_check_the_homepage() {
         System.out.println("User checks page");
     }
 
     @Then("I can see swaglabs login logo")
-    public void i_can_see_swaglabs_login_logo()throws Throwable{
+    public void i_can_see_swaglabs_login_logo() {
         // Write code here that turns the phrase above into concrete actions
         System.out.println("swags logo");
         boolean flag = loginPage.getLoginLogo();
@@ -83,7 +83,7 @@ public class LoginTest extends BasePage {
     }
 
     @Then("I can see the robot logo")
-    public void i_can_see_the_robot_logo() throws Throwable{
+    public void i_can_see_the_robot_logo() {
         // Write code here that turns the phrase above into concrete actions
         System.out.println("robot logo");
         boolean flag = loginPage.getRobotLogo();
@@ -91,23 +91,23 @@ public class LoginTest extends BasePage {
     }
 
     @Then("the tab shows (.*)")
-    public void the_tab_shows_Swag_Labs(String title) throws Throwable {
+    public void the_tab_shows_Swag_Labs(String title) {
         System.out.println("tab swag labs");
         assertEquals(title,driver.getTitle());
     }
 
     @Given("I am a standard_user")
-    public void i_am_a_standard_user() throws Throwable {
+    public void i_am_a_standard_user() {
         System.out.println("I am a standard user");
     }
 
     @Then("I will remain at the Login page")
-    public void i_will_remain_at_the_Login_page() throws Throwable {
+    public void i_will_remain_at_the_Login_page() {
         assertEquals(getURL(),getURL());
     }
 
     @Then("I will get an error message (.*)")
-    public void i_will_get_an_error_message(String error) throws Throwable{
+    public void i_will_get_an_error_message(String error) {
         // Write code here that turns the phrase above into concrete actions
         //assertTrue(contains(error));
         System.out.println("Error Message");

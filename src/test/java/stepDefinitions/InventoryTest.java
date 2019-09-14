@@ -28,7 +28,7 @@ public class InventoryTest extends BasePage {
 //    }
 
     @Given("I am login on the inventory page")
-    public void i_am_login_on_the_inventory_page() throws Throwable {
+    public void i_am_login_on_the_inventory_page() {
         initialization();
         loginPage = new LoginPage();
         inventoryPage = loginPage.loginAsStandardUser();
@@ -48,12 +48,12 @@ public class InventoryTest extends BasePage {
     }
 
     @Then("testing")
-    public void testing() throws Throwable{
+    public void testing() {
     System.out.println(inventoryPage.test());
     }
 
     @Then("(.*) is in the footer")
-    public void doesFooterContains(String footer) throws Throwable{
+    public void doesFooterContains(String footer) {
         boolean flag =inventoryPage.doesFooterContains(footer);
         assertTrue(flag);
     }

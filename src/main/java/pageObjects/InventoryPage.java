@@ -66,10 +66,7 @@ public class InventoryPage extends BasePage {
         return footer.getText();
     }
     public boolean doesFooterContains(String text){
-        if (footer.getText().contains(text)){
-            return true;
-        }
-        return false;
+        return footer.getText().contains(text);
     }
     public boolean areImagesDisplayed(){
         Iterator<WebElement> it = inventoryImages.iterator();

@@ -59,8 +59,8 @@ public class LoginPage extends BasePage {
     public InventoryPage loginAsStandardUser(){
         navigateToHomePage();
 //        username.sendKeys("standard_user");
-        username.sendKeys("problem_user");
-        password.sendKeys("secret_sauce");
+        username.sendKeys(prop.getProperty("username"));
+        password.sendKeys(prop.getProperty("password"));
         loginBtn.click();
         return new InventoryPage();
     }
