@@ -30,7 +30,7 @@ Feature: Login
     Examples:
       |username| password | error|
       |standard_user | password123 |Username and password do not match any user in this service|
-      |locked_out_user | secret_sauce |Sorry, this user has been locked out.|
+      |locked_out_user | secret_sauce |Sorry, AAAAA this user has been locked out.|
       |locked_out_user | test |Username and password do not match any user in this service|
       |problem_user | test |Username and password do not match any user in this service|
       |invalid_user | secret_sauce |Username and password do not match any user in this service|
