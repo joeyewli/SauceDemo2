@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 
 public class LoginPage extends BasePage {
     @FindBy(id="user-name")
@@ -20,8 +19,6 @@ public class LoginPage extends BasePage {
     private WebElement botImage;
     @FindBy (xpath = "//*[@data-test = 'error']")
     private WebElement errorMessage;
-
-    private String loginURL = "https://www.saucedemo.com/index.html";
 
     /*
     @FindBy(xpath = "//*[@placeholder = 'Username']")
@@ -58,14 +55,13 @@ public class LoginPage extends BasePage {
     }
     public InventoryPage loginAsStandardUser(){
         navigateToHomePage();
-//        username.sendKeys("standard_user");
         username.sendKeys(prop.getProperty("username"));
         password.sendKeys(prop.getProperty("password"));
         loginBtn.click();
         return new InventoryPage();
     }
     public String getLoginURL(){
-        return loginURL;
+        return prop.getProperty("loginpage");
     }
 
     public boolean getLoginLogo() {

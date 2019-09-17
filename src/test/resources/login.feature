@@ -1,6 +1,7 @@
 @login
 Feature: Login
-  @login
+
+  @login @now
   Scenario: User can log into saucedemo.com
     Given I am on saucedemo homepage
     When I enter username standard_user
@@ -22,15 +23,15 @@ Feature: Login
     And I am on saucedemo homepage
     When I enter username <username>
     And password <password>
-    And try to Login
+    And try to Login expecting to failed
     Then I will remain at the Login page
     And I will get an error message <error>
 
 
     Examples:
-      |username| password | error|
-      |standard_user | password123 |Username and password do not match any user in this service|
-      |locked_out_user | secret_sauce |Sorry, AAAAA this user has been locked out.|
-      |locked_out_user | test |Username and password do not match any user in this service|
-      |problem_user | test |Username and password do not match any user in this service|
-      |invalid_user | secret_sauce |Username and password do not match any user in this service|
+      | username        | password     | error                                                           |
+      | standard_user   | password123  | Username and password do not match any user in this service     |
+      | locked_out_user | secret_sauce | Sorry, this user has been locked out.                     |
+      | locked_out_user | test         | Username and password do not match any user in this service |
+      | problem_user    | test         | Username and password do not match any user in this service     |
+      | invalid_user    | secret_sauce | Username and password do not match any user in this service     |

@@ -1,5 +1,6 @@
 package BaseTest;
 
+import Utllities.TestUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pageObjects.LoginPage;
@@ -7,7 +8,9 @@ import pageObjects.LoginPage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     public static WebDriver driver;
@@ -46,6 +49,10 @@ public class BasePage {
             } else if (browserName.equals("Chrome")) {
                 ///
             }
+            driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
+            driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
         }
 
     }

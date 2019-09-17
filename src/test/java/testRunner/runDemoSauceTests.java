@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
         ,plugin = {"pretty", "html:HTML-output", "json:target/cucumber.json", "junit:XML-output/cucumber.xml"}
         ,glue = "stepDefinitions"
         ,monochrome = true
-//        ,tags = "@now")
-        ,tags = {"@inventory, @login"})
+        ,tags = "@now")
+//        ,tags = {"@inventory, @login"})
 //        ,tags = {"~@donttest"})
 
 public class runDemoSauceTests {
