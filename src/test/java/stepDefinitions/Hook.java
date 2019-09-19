@@ -3,17 +3,15 @@ package stepDefinitions;
 import BaseTest.BasePage;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
-import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 
-import java.io.File;
-
 public class Hook extends BasePage {
 
-    @After
+    @After(order = 1000)
     public void screenshotAfterScenario(Scenario scenario) {
+        System.out.println("SCREEN SHOT");
         if (scenario.isFailed()) {
             //Take a s screenshot....
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);

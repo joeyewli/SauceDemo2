@@ -1,6 +1,6 @@
-@cart @now
+@cart
 Feature: Cart
-
+  @now
   Scenario: Adding items to basket
     Given I am login on the inventory page
     When I add 4 items
@@ -35,3 +35,5 @@ Feature: Cart
       | 0        | 0          | 0         |
       | 1        | 1          | 0         |
       | 6        | 3          | 3         |
+  @end
+  Scenario: End

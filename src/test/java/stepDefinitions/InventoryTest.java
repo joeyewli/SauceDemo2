@@ -3,6 +3,7 @@ package stepDefinitions;
 import BaseTest.BasePage;
 
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -31,8 +32,8 @@ public class InventoryTest extends BasePage {
 
     @Given("I am login on the inventory page")
     public void i_am_login_on_the_inventory_page() {
-        initialization();
-        loginPage = new LoginPage();
+//        initialization();
+//        loginPage = new LoginPage();
         inventoryPage = loginPage.loginAsStandardUser();
 
     }
@@ -88,19 +89,30 @@ public class InventoryTest extends BasePage {
     public void i_have_items_in_the_cart(int i) {
         inventoryPage.addToCart(i);
     }
+    @Before("@cart, @inventory")
+    public void setUpLoginPage(){
+        System.out.println("Set up inventory page");
+        initialization();
+        loginPage = new LoginPage();
+    }
 
-    @After
+    @After(value = "@cart", order = 100)
     public void emptycart() {
-//        if (getURL().equals(prop.getProperty("inventorypage"))) {
-        if (inventoryPage!=null && inventoryPage.isInitialised()){
+        if (inventoryPage != null && inventoryPage.isInitialised()) {
             System.out.println("Empty cart method");
             while (inventoryPage.getCartItems() > 0) {
-
                 inventoryPage.removeFromCart(1);
             }
         }
-
     }
+
+    @After(value = "@cart, @inventory", order = 0)
+    public void tearDown(){
+        System.out.println("tear down inventory page");
+        driver.quit();
+        driver = null;
+    }
+
 
 
 }

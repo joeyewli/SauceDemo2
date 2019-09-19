@@ -1,7 +1,7 @@
-@login @now
+@login
 Feature: Login
 
-  @login
+  @login @now
   Scenario: User can log into saucedemo.com
     Given I am on saucedemo homepage
     When I enter username standard_user
@@ -29,9 +29,12 @@ Feature: Login
 
 
     Examples:
-      | username        | password     | error                                                           |
-      | standard_user   | password123  | Username and password do not match any user in this service     |
-      | locked_out_user | secret_sauce | Sorry, this user has been locked out.                     |
+      | username        | password     | error                                                       |
+      | standard_user   | password123  | Username and password do not match any user in this service |
+      | locked_out_user | secret_sauce | Sorry, this user has been locked out.                       |
       | locked_out_user | test         | Username and password do not match any user in this service |
-      | problem_user    | test         | Username and password do not match any user in this service     |
-      | invalid_user    | secret_sauce | Username and password do not match any user in this service     |
+      | problem_user    | test         | Username and password do not match any user in this service |
+      | invalid_user    | secret_sauce | Username and password do not match any user in this service |
+
+  @end
+  Scenario: End

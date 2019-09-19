@@ -2,6 +2,8 @@ package stepDefinitions;
 
 import BaseTest.BasePage;
 
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,13 +28,22 @@ public class LoginTest extends BasePage {
 //        System.out.println("LOGIN TEST Tear Down");
 //        driver.quit();
 //    }
-
-    @Given("I am on saucedemo homepage")
-    public void i_am_on_saucedemo_homepage() {
+    @Before("@login")
+    public void setUpLoginPage(){
+        System.out.println("Set up login page");
         initialization();
         loginPage = new LoginPage();
+    }
+    @Given("I am on saucedemo homepage")
+    public void i_am_on_saucedemo_homepage() {
+
         loginPage.navigateToHomePage();
         System.out.println("logs in to site");
+    }
+
+    @Given("I am a standard_user")
+    public void i_am_a_standard_user() {
+        System.out.println("I am a standard user");
     }
 
     @When("I enter username (.*)")
@@ -95,10 +106,6 @@ public class LoginTest extends BasePage {
         assertEquals(title, driver.getTitle());
     }
 
-    @Given("I am a standard_user")
-    public void i_am_a_standard_user() {
-        System.out.println("I am a standard user");
-    }
 
     @Then("I will remain at the Login page")
     public void i_will_remain_at_the_Login_page() {
@@ -113,7 +120,12 @@ public class LoginTest extends BasePage {
         assertTrue(loginPage.getErrorMessage().contains(error));
     }
 
-
+    @After(value = "@login, @end", order = 0)
+    public void tearDown(){
+        System.out.println("tear down login page");
+        driver.quit();
+        driver = null;
+    }
 
 
 }

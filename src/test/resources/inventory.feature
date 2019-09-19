@@ -1,7 +1,7 @@
-@inventory @now
+@inventory
 Feature: InventoryPage
 
-  @links
+  @links @now
   Scenario: Check all links are working
     Given I am login on the inventory page
     When I click on all the links
@@ -26,4 +26,5 @@ Feature: InventoryPage
   Scenario: All inventory images are displayed
     Given I am login on the inventory page
     Then all images are displayed
-
+  @end
+  Scenario: End

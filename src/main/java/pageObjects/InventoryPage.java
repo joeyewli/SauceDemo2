@@ -127,6 +127,7 @@ public class InventoryPage extends BasePage {
      * @return cart counter, if 0 then the element wouldn't be found.
      */
     public int getCartItems() {
+
         try {
             return Integer.parseInt(cart.getText());
         } catch (NoSuchElementException e) {
