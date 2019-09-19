@@ -13,7 +13,7 @@ import java.io.File;
 public class Hook extends BasePage {
 
     @After
-    public void tearDown(Scenario scenario) {
+    public void screenshotAfterScenario(Scenario scenario) {
         if (scenario.isFailed()) {
             //Take a s screenshot....
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);

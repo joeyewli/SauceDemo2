@@ -1,4 +1,4 @@
-@cart
+@cart @now
 Feature: Cart
 
   Scenario: Adding items to basket

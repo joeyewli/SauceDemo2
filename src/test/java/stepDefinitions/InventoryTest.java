@@ -91,7 +91,8 @@ public class InventoryTest extends BasePage {
 
     @After
     public void emptycart() {
-        if (getURL().equals(prop.getProperty("inventorypage"))) {
+//        if (getURL().equals(prop.getProperty("inventorypage"))) {
+        if (inventoryPage!=null && inventoryPage.isInitialised()){
             System.out.println("Empty cart method");
             while (inventoryPage.getCartItems() > 0) {
 

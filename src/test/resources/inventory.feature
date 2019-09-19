@@ -1,4 +1,4 @@
-@inventory
+@inventory @now
 Feature: InventoryPage
 
   @links

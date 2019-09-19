@@ -32,8 +32,8 @@ public class InventoryPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public  void isInitialised(){
-        footer.isDisplayed();
+    public  boolean isInitialised(){
+        return footer.isDisplayed();
     }
 
     public void checkLinks() {
@@ -130,7 +130,7 @@ public class InventoryPage extends BasePage {
         try {
             return Integer.parseInt(cart.getText());
         } catch (NoSuchElementException e) {
-            System.out.println("Return 0");
+            System.out.println("Return 0 - No element");
             return 0;
         }
 

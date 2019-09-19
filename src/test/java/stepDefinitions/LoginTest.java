@@ -53,6 +53,7 @@ public class LoginTest extends BasePage {
     @When("try to Login")
     public void try_to_Login() {
         inventoryPage = loginPage.pressLoginBtn();
+        assertTrue(inventoryPage.isInitialised());
     }
 
     @When("try to Login expecting to failed")
@@ -111,6 +112,8 @@ public class LoginTest extends BasePage {
         System.out.println("Error Message");
         assertTrue(loginPage.getErrorMessage().contains(error));
     }
+
+
 
 
 }
