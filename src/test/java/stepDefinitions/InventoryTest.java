@@ -9,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageObjects.CartPage;
 import pageObjects.FooterPage;
+import pageObjects.HeaderPage;
 import pageObjects.InventoryPage;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +19,7 @@ public class InventoryTest extends BasePage {
     private InventoryPage inventoryPage;
     private CartPage cartPage;
     private FooterPage footerPage;
+    private HeaderPage headerPage;
 //    @Before
 //    public void setup(){
 //        System.out.println("INVENTORY TEST SETUP");
@@ -71,8 +73,7 @@ public class InventoryTest extends BasePage {
 
     @Then("^cart will have (\\d+) items in it$")
     public void cart_will_have_items_in_it(int i) {
-        int cartItems = inventoryPage.getCartItems();
-        assertEquals(i, cartItems);
+        assertEquals(i, headerPage.getCartItems());
     }
 
     @Given("^I have (\\d+) items in the cart")
@@ -112,7 +113,7 @@ public class InventoryTest extends BasePage {
 
     @When("I click on the Cart")
     public void i_click_on_the_Cart() throws Throwable {
-        cartPage = inventoryPage.clickOnCartIcon();
+        cartPage = headerPage.clickOnCartIcon();
     }
 
     @Then("I will be in the (.*) Page")
@@ -127,13 +128,14 @@ public class InventoryTest extends BasePage {
         initialization();
         inventoryPage = new InventoryPage();
         footerPage = new FooterPage();
+        headerPage = new HeaderPage();
     }
 
     @After(value = "@addToCart", order = 100)
     public void emptycart() {
         if (inventoryPage != null && inventoryPage.isInitialised()) {
 //            System.out.println("Empty cart method");
-            while (inventoryPage.getCartItems() > 0) {
+            while (headerPage.getCartItems() > 0) {
                 inventoryPage.removeFromCart(1);
             }
         }

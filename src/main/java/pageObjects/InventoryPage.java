@@ -1,7 +1,6 @@
 package pageObjects;
 
 import BaseTest.BasePage;
-import org.openqa.selenium.NoSuchElementException;;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,11 +18,7 @@ public class InventoryPage extends BasePage {
     private List<WebElement> links;
     @FindBy(className = "inventory_item_img")
     private List<WebElement> inventoryImages;
-    @FindBy(className = "shopping_cart_badge")
-    private WebElement cart;
-    //    @FindBy(xpath = "//*[@class='inventory_list']/child::div//*[contains(@class,'add-to-cart-button')]")
-    @FindBy(className = "shopping_cart_container")
-    private WebElement cartIcon;
+    ;
     @FindBy(className = "btn_inventory")
     private List<WebElement> addToCartBtn;
     @FindBy(className = "inventory_item_name")
@@ -80,7 +75,7 @@ public class InventoryPage extends BasePage {
 
     public void showlinks() {
         for (int i = 0; i < links.size(); i++) {
-             System.out.println(links.get(i));
+            System.out.println(links.get(i));
         }
     }
 
@@ -120,16 +115,8 @@ public class InventoryPage extends BasePage {
     /**
      * @return cart counter, if 0 then the element wouldn't be found.
      */
-    public int getCartItems() {
 
-        try {
-            return Integer.parseInt(cart.getText());
-        } catch (NoSuchElementException e) {
-//            System.out.println("Return 0 - No element");
-            return 0;
-        }
 
-    }
 
     public void selectSortingFilter(String sortOption) {
         Select dropdown = new Select(sortingDropDownList);
@@ -177,11 +164,6 @@ public class InventoryPage extends BasePage {
         }
 //        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
         return true;
-    }
-
-    public CartPage clickOnCartIcon() {
-        cartIcon.click();
-        return new CartPage();
     }
 
 
