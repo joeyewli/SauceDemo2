@@ -1,6 +1,6 @@
 @cart
 Feature: Cart
-  @now
+
   Scenario: Adding items to basket
     Given I am login on the inventory page
     When I add 4 items
@@ -35,5 +35,13 @@ Feature: Cart
       | 0        | 0          | 0         |
       | 1        | 1          | 0         |
       | 6        | 3          | 3         |
-  @end
+
+@now
+Scenario: Clicking Cart in InventoryPage will load the Cart Page
+  Given I am login on the inventory page
+  When I click on the Cart
+  Then I will be in the Your Cart Page
+
+  @end @now
   Scenario: End
+    Then QUIT DRIVER

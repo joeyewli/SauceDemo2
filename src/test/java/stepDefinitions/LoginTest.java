@@ -2,7 +2,6 @@ package stepDefinitions;
 
 import BaseTest.BasePage;
 
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,8 +14,8 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends BasePage {
 
-    LoginPage loginPage;
-    InventoryPage inventoryPage;
+    private LoginPage loginPage;
+    private InventoryPage inventoryPage;
 //    @Before
 //    public void setup(){
 //        System.out.println("LOGIN TEST SETUP");
@@ -38,26 +37,26 @@ public class LoginTest extends BasePage {
     public void i_am_on_saucedemo_homepage() {
 
         loginPage.navigateToHomePage();
-        System.out.println("logs in to site");
+//        System.out.println("logs in to site");
     }
 
     @Given("I am a standard_user")
     public void i_am_a_standard_user() {
-        System.out.println("I am a standard user");
+//        System.out.println("I am a standard user");
     }
 
     @When("I enter username (.*)")
     public void i_enter_username(String username) {
         // Write code here that turns the phrase above into concrete actions
         loginPage.insertUsername(username);
-        System.out.println("enters username");
+//        System.out.println("enters username");
     }
 
     @When("password (.*)")
     public void password(String password) {
         // Write code here that turns the phrase above into concrete actions
         loginPage.insertPassword(password);
-        System.out.println("enters password");
+//        System.out.println("enters password");
     }
 
 
@@ -87,7 +86,7 @@ public class LoginTest extends BasePage {
     @Then("I can see swaglabs login logo")
     public void i_can_see_swaglabs_login_logo() {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("swags logo");
+//        System.out.println("swags logo");
         boolean flag = loginPage.getLoginLogo();
         assertTrue(flag);
     }
@@ -95,14 +94,14 @@ public class LoginTest extends BasePage {
     @Then("I can see the robot logo")
     public void i_can_see_the_robot_logo() {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("robot logo");
+//        System.out.println("robot logo");
         boolean flag = loginPage.getRobotLogo();
         assertTrue(flag);
     }
 
     @Then("the tab shows (.*)")
     public void the_tab_shows_Swag_Labs(String title) {
-        System.out.println("tab swag labs");
+//        System.out.println("tab swag labs");
         assertEquals(title, driver.getTitle());
     }
 
@@ -116,16 +115,16 @@ public class LoginTest extends BasePage {
     public void i_will_get_an_error_message(String error) {
         // Write code here that turns the phrase above into concrete actions
         //assertTrue(contains(error));
-        System.out.println("Error Message");
+//        System.out.println("Error Message");
         assertTrue(loginPage.getErrorMessage().contains(error));
     }
 
-    @After(value = "@login, @end", order = 0)
-    public void tearDown(){
-        System.out.println("tear down login page");
-        driver.quit();
-        driver = null;
-    }
+//    @After(value = "@login, @end", order = 0)
+//    public void tearDown(){
+//        System.out.println("tear down login page");
+//        driver.quit();
+//        driver = null;
+//    }
 
 
 }

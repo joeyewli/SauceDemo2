@@ -8,10 +8,10 @@ import pageObjects.LoginPage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("ALL")
 public class BasePage {
     public static WebDriver driver;
     public static Properties prop;
@@ -34,11 +34,11 @@ public class BasePage {
 
     /**
      * This initializes the browser depending on the config file.
-     * Will be call by all childs (Login Page and Step definitions)
+     * Will be call by all children classes (Login Page and Step definitions)
      */
     public static void initialization(){
         String browserName = prop.getProperty("browser");
-//        System.out.println("--------------------------------Initializing Browswer-------------------------");
+//        System.out.println("--------------------------------Initializing Browser-------------------------");
         if (driver == null) {
             if (browserName.equals("FireFox")) {
 //                System.out.println("-------------------------------FireFox initialized------------------------" + browserName);
@@ -47,14 +47,13 @@ public class BasePage {
                 System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
                 driver = new FirefoxDriver();
             } else if (browserName.equals("Chrome")) {
-                ///
+                //
             }
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
             driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
             driver.manage().timeouts().pageLoadTimeout(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
         }
-
     }
 
     public LoginPage navigateToHomePage(){
@@ -63,7 +62,7 @@ public class BasePage {
     }
 
     public String getURL() {
-        System.out.println(driver.getCurrentUrl());
+//        System.out.println(driver.getCurrentUrl());
         return driver.getCurrentUrl();
     }
     public String getHomepage(){

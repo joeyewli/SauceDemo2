@@ -1,7 +1,7 @@
 @login
 Feature: Login
 
-  @login @now
+  @login
   Scenario: User can log into saucedemo.com
     Given I am on saucedemo homepage
     When I enter username standard_user
@@ -38,3 +38,4 @@ Feature: Login
 
   @end
   Scenario: End
+    Then QUIT DRIVER

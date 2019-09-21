@@ -7,6 +7,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageObjects.CartPage;
 import pageObjects.InventoryPage;
 import pageObjects.LoginPage;
 
@@ -14,8 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class InventoryTest extends BasePage {
-    LoginPage loginPage;
-    InventoryPage inventoryPage;
+    private LoginPage loginPage;
+    private InventoryPage inventoryPage;
+    private CartPage cartPage;
 
 //    @Before
 //    public void setup(){
@@ -89,9 +91,51 @@ public class InventoryTest extends BasePage {
     public void i_have_items_in_the_cart(int i) {
         inventoryPage.addToCart(i);
     }
+
+    @When("I sort (.*)")
+    public void i_sort(String sortOption) throws Throwable {
+        inventoryPage.selectSortingFilter(sortOption);
+    }
+
+    @Then("the Item prices are sorted from low to high")
+    public void the_Item_prices_are_sorted_from_low_to_high()  throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+       assertTrue(inventoryPage.checkPriceSortedFromLowToHigh());
+    }
+
+
+    @Then("the Item prices are sorted from high to low")
+    public void the_Item_prices_are_sorted_from_high_to_low()  throws Throwable{
+        // Write code here that turns the phrase above into concrete actions
+        assertTrue(inventoryPage.checkPriceSortedFromHighToLow());
+    }
+
+    @Then("the Items are sorted in ascending order")
+    public void the_Items_are_sorted_in_ascending_order()throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertTrue(inventoryPage.checkItemsAscendingOrder());
+    }
+
+    @Then("the Items are sorted in descending order")
+    public void the_Items_are_sorted_in_descending_order() throws Throwable{
+        // Write code here that turns the phrase above into concrete actions
+        assertTrue(inventoryPage.checkItemsDescendingOrder());
+    }
+
+    @When("I click on the Cart")
+    public void i_click_on_the_Cart() throws Throwable {
+        cartPage = inventoryPage.clickOnCartIcon();
+    }
+
+    @Then("I will be in the (.*) Page")
+    public void i_will_be_in_the_Cart_Page(String title) {
+        assertEquals(title,cartPage.getPageTitle());
+    }
+
+
     @Before("@cart, @inventory")
     public void setUpLoginPage(){
-        System.out.println("Set up inventory page");
+//        System.out.println("Set up inventory page");
         initialization();
         loginPage = new LoginPage();
     }
@@ -99,20 +143,22 @@ public class InventoryTest extends BasePage {
     @After(value = "@cart", order = 100)
     public void emptycart() {
         if (inventoryPage != null && inventoryPage.isInitialised()) {
-            System.out.println("Empty cart method");
+//            System.out.println("Empty cart method");
             while (inventoryPage.getCartItems() > 0) {
                 inventoryPage.removeFromCart(1);
             }
         }
     }
 
-    @After(value = "@cart, @inventory", order = 0)
-    public void tearDown(){
-        System.out.println("tear down inventory page");
-        driver.quit();
-        driver = null;
-    }
 
+
+
+//    @After(value = "@cart, @inventory", order = 0)
+//    public void tearDown(){
+//        System.out.println("tear down inventory page");
+//        driver.quit();
+//        driver = null;
+//    }
 
 
 }

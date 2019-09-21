@@ -1,11 +1,11 @@
 package pageObjects;
 
 import BaseTest.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -24,15 +24,25 @@ public class InventoryPage extends BasePage {
     @FindBy(className = "shopping_cart_badge")
     private WebElement cart;
     //    @FindBy(xpath = "//*[@class='inventory_list']/child::div//*[contains(@class,'add-to-cart-button')]")
+    @FindBy(className = "shopping_cart_container")
+    private WebElement cartIcon;
     @FindBy(className = "btn_inventory")
     private List<WebElement> addToCartBtn;
+    @FindBy(className = "inventory_item_name")
+    private List<WebElement> itemNames;
+    @FindBy(className = "inventory_item_desc")
+    private List<WebElement> itemDescription;
+    @FindBy(className = "inventory_item_price")
+    private List<WebElement> itemPrice;
+    @FindBy(className = "product_sort_container")
+    private WebElement sortingDropDownList;
 
 
     public InventoryPage() {
         PageFactory.initElements(driver, this);
     }
 
-    public  boolean isInitialised(){
+    public boolean isInitialised() {
         return footer.isDisplayed();
     }
 
@@ -44,7 +54,7 @@ public class InventoryPage extends BasePage {
         while (it.hasNext()) {
             url = it.next().getAttribute("href");
             System.out.print(url);
-            if (url == null || url == "") {
+            if (url == null || url.equals("")) {
                 System.out.println(" URL is either not configured for anchor tag or it is empty");
                 continue;
             }
@@ -97,7 +107,6 @@ public class InventoryPage extends BasePage {
         try {
             for (int i = 0; i < x; i++) {
                 addToCartBtn.get(i).click();
-//        addToCartBtn.get(i).getAttribute("button").toString();
             }
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -109,14 +118,9 @@ public class InventoryPage extends BasePage {
 //        System.out.println("Remove method called: " + x);
         int i = 0;
         while (i < addToCartBtn.size() && x > 0) {
-            if (!addToCartBtn.get(i).getText().equals("REMOVE")) {
-//                System.out.println("i = " + i + addToCartBtn.get(i).getText());
-//                i++;
-            } else {
+            if (addToCartBtn.get(i).getText().equals("REMOVE")) {
                 addToCartBtn.get(i).click();
-//                System.out.println("Click remove i = " + i + ", x = " + x);
                 x--;
-//                i++;
             }
             i++;
         }
@@ -131,9 +135,64 @@ public class InventoryPage extends BasePage {
         try {
             return Integer.parseInt(cart.getText());
         } catch (NoSuchElementException e) {
-            System.out.println("Return 0 - No element");
+//            System.out.println("Return 0 - No element");
             return 0;
         }
 
     }
+
+    public void selectSortingFilter(String sortOption) {
+        Select dropdown = new Select(sortingDropDownList);
+        dropdown.selectByVisibleText(sortOption);
+    }
+
+    public boolean checkPriceSortedFromLowToHigh() {
+        for (int i = 0; i < itemPrice.size() - 1; i++) {
+//            System.out.println(itemPrice.get(i).getText().substring(1)+ "> " + Double.parseDouble(itemPrice.get(i+1).getText().substring(1)));
+            if (Double.parseDouble(itemPrice.get(i).getText().substring(1)) > Double.parseDouble(itemPrice.get(i + 1).getText().substring(1))) {
+                return false;
+            }
+        }
+//        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
+        return true;
+    }
+
+    public boolean checkPriceSortedFromHighToLow() {
+        for (int i = 0; i < itemPrice.size() - 1; i++) {
+            if (Double.parseDouble(itemPrice.get(i).getText().substring(1)) < Double.parseDouble(itemPrice.get(i + 1).getText().substring(1))) {
+                return false;
+            }
+        }
+//        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
+        return true;
+    }
+
+    public boolean checkItemsAscendingOrder() {
+        for (int i = 0; i < itemPrice.size() - 1; i++) {
+//            System.out.println(itemPrice.get(i).getText().substring(1)+ "> " + Double.parseDouble(itemPrice.get(i+1).getText().substring(1)));
+            if (itemNames.get(i).getText().compareTo(itemNames.get(i + 1).getText()) > 0) {
+                return false;
+            }
+        }
+//        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
+        return true;
+    }
+
+    public boolean checkItemsDescendingOrder() {
+        for (int i = 0; i < itemPrice.size() - 1; i++) {
+//            System.out.println(itemPrice.get(i).getText().substring(1)+ "> " + Double.parseDouble(itemPrice.get(i+1).getText().substring(1)));
+            if (itemNames.get(i).getText().compareTo(itemNames.get(i + 1).getText()) < 0) {
+                return false;
+            }
+        }
+//        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
+        return true;
+    }
+
+    public CartPage clickOnCartIcon() {
+        cartIcon.click();
+        return new CartPage();
+    }
+
+
 }
