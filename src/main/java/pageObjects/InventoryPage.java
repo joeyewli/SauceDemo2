@@ -17,8 +17,6 @@ import java.util.List;
 public class InventoryPage extends BasePage {
     @FindBy(tagName = "a")
     private List<WebElement> links;
-    @FindBy(className = "footer")
-    private WebElement footer;
     @FindBy(className = "inventory_item_img")
     private List<WebElement> inventoryImages;
     @FindBy(className = "shopping_cart_badge")
@@ -36,14 +34,15 @@ public class InventoryPage extends BasePage {
     private List<WebElement> itemPrice;
     @FindBy(className = "product_sort_container")
     private WebElement sortingDropDownList;
-
+    @FindBy(className = "product_label")
+    private WebElement pageTitle;
 
     public InventoryPage() {
         PageFactory.initElements(driver, this);
     }
 
     public boolean isInitialised() {
-        return footer.isDisplayed();
+        return pageTitle.isDisplayed();
     }
 
     public void checkLinks() {
@@ -81,16 +80,8 @@ public class InventoryPage extends BasePage {
 
     public void showlinks() {
         for (int i = 0; i < links.size(); i++) {
-            // System.out.println(links.get(i));
+             System.out.println(links.get(i));
         }
-    }
-
-    public String test() {
-        return footer.getText();
-    }
-
-    public boolean doesFooterContains(String text) {
-        return footer.getText().contains(text);
     }
 
     public boolean areImagesDisplayed() {
@@ -111,7 +102,6 @@ public class InventoryPage extends BasePage {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-
     }
 
     public void removeFromCart(int x) {

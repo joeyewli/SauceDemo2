@@ -8,17 +8,16 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageObjects.CartPage;
+import pageObjects.FooterPage;
 import pageObjects.InventoryPage;
-import pageObjects.LoginPage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class InventoryTest extends BasePage {
-    private LoginPage loginPage;
     private InventoryPage inventoryPage;
     private CartPage cartPage;
-
+    private FooterPage footerPage;
 //    @Before
 //    public void setup(){
 //        System.out.println("INVENTORY TEST SETUP");
@@ -32,18 +31,11 @@ public class InventoryTest extends BasePage {
 ////        driver.quit();
 //    }
 
-    @Given("I am login on the inventory page")
-    public void i_am_login_on_the_inventory_page() {
-//        initialization();
-//        loginPage = new LoginPage();
-        inventoryPage = loginPage.loginAsStandardUser();
 
-    }
 
     @When("I click on all the links")
     public void i_click_on_all_the_links() {
         inventoryPage.showlinks();
-
     }
 
     @Then("all links works")
@@ -54,14 +46,10 @@ public class InventoryTest extends BasePage {
 
     @Then("testing")
     public void testing() {
-        System.out.println(inventoryPage.test());
+        System.out.println("Test");
     }
 
-    @Then("(.*) is in the footer")
-    public void doesFooterContains(String footer) {
-        boolean flag = inventoryPage.doesFooterContains(footer);
-        assertTrue(flag);
-    }
+
 
     @Then("all images are displayed")
     public void areAllImagesDisplayed() {
@@ -134,13 +122,14 @@ public class InventoryTest extends BasePage {
 
 
     @Before("@cart, @inventory")
-    public void setUpLoginPage(){
+    public void setUpInventoryPage(){
 //        System.out.println("Set up inventory page");
         initialization();
-        loginPage = new LoginPage();
+        inventoryPage = new InventoryPage();
+        footerPage = new FooterPage();
     }
 
-    @After(value = "@cart", order = 100)
+    @After(value = "@addToCart", order = 100)
     public void emptycart() {
         if (inventoryPage != null && inventoryPage.isInitialised()) {
 //            System.out.println("Empty cart method");

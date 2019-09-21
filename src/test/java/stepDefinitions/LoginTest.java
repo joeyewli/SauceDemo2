@@ -27,7 +27,8 @@ public class LoginTest extends BasePage {
 //        System.out.println("LOGIN TEST Tear Down");
 //        driver.quit();
 //    }
-    @Before("@login")
+
+    @Before()
     public void setUpLoginPage(){
         System.out.println("Set up login page");
         initialization();
@@ -45,16 +46,20 @@ public class LoginTest extends BasePage {
 //        System.out.println("I am a standard user");
     }
 
+    @Given("I am login on the inventory page")
+    public void i_am_login_on_the_inventory_page() {
+        inventoryPage = loginPage.loginAsStandardUser();
+
+    }
+
     @When("I enter username (.*)")
     public void i_enter_username(String username) {
-        // Write code here that turns the phrase above into concrete actions
         loginPage.insertUsername(username);
 //        System.out.println("enters username");
     }
 
     @When("password (.*)")
     public void password(String password) {
-        // Write code here that turns the phrase above into concrete actions
         loginPage.insertPassword(password);
 //        System.out.println("enters password");
     }
@@ -77,7 +82,6 @@ public class LoginTest extends BasePage {
         System.out.println("User is logged in");
     }
 
-
     @When("I check the homepage")
     public void i_check_the_homepage() {
         System.out.println("User checks page");
@@ -85,7 +89,6 @@ public class LoginTest extends BasePage {
 
     @Then("I can see swaglabs login logo")
     public void i_can_see_swaglabs_login_logo() {
-        // Write code here that turns the phrase above into concrete actions
 //        System.out.println("swags logo");
         boolean flag = loginPage.getLoginLogo();
         assertTrue(flag);
@@ -93,7 +96,6 @@ public class LoginTest extends BasePage {
 
     @Then("I can see the robot logo")
     public void i_can_see_the_robot_logo() {
-        // Write code here that turns the phrase above into concrete actions
 //        System.out.println("robot logo");
         boolean flag = loginPage.getRobotLogo();
         assertTrue(flag);
@@ -113,7 +115,6 @@ public class LoginTest extends BasePage {
 
     @Then("I will get an error message (.*)")
     public void i_will_get_an_error_message(String error) {
-        // Write code here that turns the phrase above into concrete actions
         //assertTrue(contains(error));
 //        System.out.println("Error Message");
         assertTrue(loginPage.getErrorMessage().contains(error));
