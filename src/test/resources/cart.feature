@@ -50,6 +50,7 @@ Feature: Cart
     When I click on Continue Shopping button
     Then I will be in the Products page
 
+  @checkout
   Scenario: Checkout will
     Given I am login on the Cart page
     When I checkout

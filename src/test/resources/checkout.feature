@@ -1,4 +1,4 @@
-@cart
+@checkout
 Feature: Checkout
 
   Scenario: Cancel in Checkout Page will return me to the Cart Page

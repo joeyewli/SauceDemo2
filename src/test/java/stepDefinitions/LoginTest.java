@@ -34,13 +34,12 @@ public class LoginTest extends BasePage {
 
     @Before()
     public void setUpLoginPage(){
-        System.out.println("Set up login page");
+//        System.out.println("Set up login page");
         initialization();
         loginPage = new LoginPage();
     }
     @Given("I am on saucedemo homepage")
     public void i_am_on_saucedemo_homepage() {
-
         loginPage.navigateToHomePage();
 //        System.out.println("logs in to site");
     }
@@ -125,7 +124,7 @@ public class LoginTest extends BasePage {
     }
 
     @Then("I will get an error message (.*) in the Login page")
-    public void i_will_get_an_error_message(String error) {
+    public void i_will_get_an_error_message_in_the_Login_page(String error) {
         //assertTrue(contains(error));
 //        System.out.println("Error Message");
         assertTrue(loginPage.getErrorMessage().contains(error));

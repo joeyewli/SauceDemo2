@@ -7,7 +7,6 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageObjects.CartPage;
 import pageObjects.FooterPage;
 import pageObjects.HeaderPage;
 import pageObjects.InventoryPage;
@@ -17,23 +16,8 @@ import static org.junit.Assert.assertTrue;
 
 public class InventoryTest extends BasePage {
     private InventoryPage inventoryPage;
-    private CartPage cartPage;
     private FooterPage footerPage;
     private HeaderPage headerPage;
-//    @Before
-//    public void setup(){
-//        System.out.println("INVENTORY TEST SETUP");
-////        initialization();
-////        loginPage = new LoginPage();
-//    }
-//
-//    @After
-//    public void teardown() {
-//        System.out.println("INVENTORY TEST Tear Down");
-////        driver.quit();
-//    }
-
-
 
     @When("I click on all the links")
     public void i_click_on_all_the_links() {
@@ -42,7 +26,6 @@ public class InventoryTest extends BasePage {
 
     @Then("all links works")
     public void all_links_works() {
-        // Write code here that turns the phrase above into concrete actions
         inventoryPage.checkLinks();
     }
 
@@ -50,7 +33,6 @@ public class InventoryTest extends BasePage {
     public void testing() {
         System.out.println("Test");
     }
-
 
 
     @Then("all images are displayed")
@@ -61,7 +43,6 @@ public class InventoryTest extends BasePage {
 
     @When("^I add (\\d+) items$")
     public void I_add_items(int i) {
-        // Write code here that turns the phrase above into concrete actions
         inventoryPage.addToCart(i);
 //        System.out.println("add items = " +i);
     }
@@ -71,10 +52,7 @@ public class InventoryTest extends BasePage {
         inventoryPage.removeFromCart(i);
     }
 
-    @Then("^cart will have (\\d+) items in it$")
-    public void cart_will_have_items_in_it(int i) {
-        assertEquals(i, headerPage.getCartItems());
-    }
+
 
     @Given("^I have (\\d+) items in the cart")
     public void i_have_items_in_the_cart(int i) {
@@ -88,37 +66,27 @@ public class InventoryTest extends BasePage {
 
     @Then("the Item prices are sorted from low to high")
     public void the_Item_prices_are_sorted_from_low_to_high()  throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
        assertTrue(inventoryPage.checkPriceSortedFromLowToHigh());
     }
 
 
     @Then("the Item prices are sorted from high to low")
     public void the_Item_prices_are_sorted_from_high_to_low()  throws Throwable{
-        // Write code here that turns the phrase above into concrete actions
         assertTrue(inventoryPage.checkPriceSortedFromHighToLow());
     }
 
     @Then("the Items are sorted in ascending order")
     public void the_Items_are_sorted_in_ascending_order()throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         assertTrue(inventoryPage.checkItemsAscendingOrder());
     }
 
     @Then("the Items are sorted in descending order")
     public void the_Items_are_sorted_in_descending_order() throws Throwable{
-        // Write code here that turns the phrase above into concrete actions
         assertTrue(inventoryPage.checkItemsDescendingOrder());
-    }
-
-    @When("I click on the Cart")
-    public void i_click_on_the_Cart() throws Throwable {
-        cartPage = headerPage.clickOnCartIcon();
     }
 
     @Then("I will be in the Products page")
     public void i_will_be_in_the_Products_page() {
-        // Write code here that turns the phrase above into concrete actions
         assertEquals("Products", inventoryPage.getPageTitle());
     }
 
@@ -130,16 +98,16 @@ public class InventoryTest extends BasePage {
         inventoryPage = new InventoryPage();
         footerPage = new FooterPage();
         headerPage = new HeaderPage();
-        cartPage = new CartPage();
     }
 
     @After(value = "@addToCart", order = 100)
     public void emptycart() {
         if (inventoryPage != null && inventoryPage.isInitialised()) {
 //            System.out.println("Empty cart method");
-            while (headerPage.getCartItems() > 0) {
-                inventoryPage.removeFromCart(1);
-            }
+//            while (headerPage.getCartItems() > 0) {
+//                inventoryPage.removeFromCart(1);
+//            }
+            inventoryPage.removeFromCart(headerPage.getCartItems());
         }
     }
 
