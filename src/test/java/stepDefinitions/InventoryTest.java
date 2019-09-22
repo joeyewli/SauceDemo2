@@ -116,9 +116,10 @@ public class InventoryTest extends BasePage {
         cartPage = headerPage.clickOnCartIcon();
     }
 
-    @Then("I will be in the (.*) Page")
-    public void i_will_be_in_the_Cart_Page(String title) {
-        assertEquals(title,cartPage.getPageTitle());
+    @Then("I will be in the Products page")
+    public void i_will_be_in_the_Products_page() {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals("Products", inventoryPage.getPageTitle());
     }
 
 
@@ -129,6 +130,7 @@ public class InventoryTest extends BasePage {
         inventoryPage = new InventoryPage();
         footerPage = new FooterPage();
         headerPage = new HeaderPage();
+        cartPage = new CartPage();
     }
 
     @After(value = "@addToCart", order = 100)

@@ -15,7 +15,7 @@ public class CartPage extends BasePage {
     private List<WebElement> itemPrice;
     @FindBy(className = "cart_button")
     private List<WebElement> removeBtn;
-    @FindBy(xpath = "//[contains(text(),'Continue Shopping')]")
+    @FindBy(xpath = "//*[contains(text(),'Continue Shopping')]")
     private WebElement continueShoppingBtn;
     @FindBy(className = "checkout_button")
     private WebElement checkoutBtn;
@@ -28,6 +28,16 @@ public class CartPage extends BasePage {
 
     public String getPageTitle() {
     return pageTitle.getText();
+    }
+
+    public InventoryPage clickContinueShopping() {
+        continueShoppingBtn.click();
+        return new InventoryPage();
+    }
+
+    public CheckoutPage clickCheckout() {
+        checkoutBtn.click();
+        return new CheckoutPage();
     }
 
 

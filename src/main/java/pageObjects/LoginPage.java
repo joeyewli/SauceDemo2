@@ -60,6 +60,7 @@ public class LoginPage extends BasePage {
         loginBtn.click();
         return new InventoryPage();
     }
+
     public String getLoginURL(){
         return prop.getProperty("loginpage");
     }

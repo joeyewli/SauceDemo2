@@ -6,6 +6,8 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageObjects.CartPage;
+import pageObjects.HeaderPage;
 import pageObjects.InventoryPage;
 import pageObjects.LoginPage;
 
@@ -16,6 +18,8 @@ public class LoginTest extends BasePage {
 
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
+    private HeaderPage headerPage;
+    private CartPage cartPage;
 //    @Before
 //    public void setup(){
 //        System.out.println("LOGIN TEST SETUP");
@@ -50,6 +54,13 @@ public class LoginTest extends BasePage {
     public void i_am_login_on_the_inventory_page() {
         inventoryPage = loginPage.loginAsStandardUser();
 
+    }
+
+    @Given("I am login on the Cart page")
+    public void i_am_login_on_the_cart_page() {
+        inventoryPage = loginPage.loginAsStandardUser();
+        headerPage = new HeaderPage();
+        cartPage = headerPage.clickOnCartIcon();
     }
 
     @When("I enter username (.*)")
@@ -113,7 +124,7 @@ public class LoginTest extends BasePage {
         assertEquals(getURL(), getURL());
     }
 
-    @Then("I will get an error message (.*)")
+    @Then("I will get an error message (.*) in the Login page")
     public void i_will_get_an_error_message(String error) {
         //assertTrue(contains(error));
 //        System.out.println("Error Message");

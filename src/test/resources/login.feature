@@ -25,7 +25,7 @@ Feature: Login
     And password <password>
     And try to Login expecting to failed
     Then I will remain at the Login page
-    And I will get an error message <error>
+    And I will get an error message <error> in the Login Page
 
 
     Examples:

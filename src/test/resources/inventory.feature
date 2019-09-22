@@ -1,7 +1,7 @@
 @inventory
 Feature: InventoryPage
 
-  @links @now
+  @links
   Scenario: Check all links are working
     Given I am login on the inventory page
     When I click on all the links
@@ -51,6 +51,6 @@ Feature: InventoryPage
     When I sort Name (Z to A)
     Then the Items are sorted in descending order
 
-  @end @now
+  @end
   Scenario: End
     Then QUIT DRIVER

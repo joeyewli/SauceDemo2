@@ -40,10 +40,20 @@ Feature: Cart
       | 6        | 3          | 3         |
 
 
-Scenario: Clicking Cart in InventoryPage will load the Cart Page
-  Given I am login on the inventory page
-  When I click on the Cart
-  Then I will be in the Your Cart Page
+  Scenario: Clicking Cart in InventoryPage will load the Cart Page
+    Given I am login on the Cart page
+    Then I will be in the Your Cart Page
+
+
+  Scenario: Pressing Continue Shopping will return to Inventory Page
+    Given I am login on the Cart page
+    When I click on Continue Shopping button
+    Then I will be in the Products page
+
+  Scenario: Checkout will
+    Given I am login on the Cart page
+    When I checkout
+    Then I will be in the Checkout: Your Information page
 
   @end
   Scenario: End

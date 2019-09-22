@@ -18,7 +18,6 @@ public class InventoryPage extends BasePage {
     private List<WebElement> links;
     @FindBy(className = "inventory_item_img")
     private List<WebElement> inventoryImages;
-    ;
     @FindBy(className = "btn_inventory")
     private List<WebElement> addToCartBtn;
     @FindBy(className = "inventory_item_name")
@@ -164,6 +163,10 @@ public class InventoryPage extends BasePage {
         }
 //        System.out.println("=================TESTING=============" + itemPrice.get(0).getText().substring(1));
         return true;
+    }
+
+    public String getPageTitle() {
+        return pageTitle.getText();
     }
 
 
