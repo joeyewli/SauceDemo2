@@ -39,7 +39,7 @@ Feature: Checkout
     And tax = 8 percent of Item total
     And Total = Tax and Item Total
 
-  @now @cart @addToCart @emptyCartCheckoutOverview
+  @cart @addToCart @emptyCartCheckoutOverview
   Scenario Outline:  sum of cart items
     Given I am login on the inventory page
     When I add <items> items
@@ -59,6 +59,19 @@ Feature: Checkout
       | 4     |
       | 5     |
       | 6     |
+
+  @addToCart @emptyCartCheckoutOverview @cart @now
+  Scenario: sum of 2 cart items
+    Given I am login on the inventory page
+    When I add 2 items
+    And I click on the Cart
+    And I checkout
+    And I enter my details- first name = John, last name = Lewis, postcode = Ha
+    And I click on continue
+    And I click Finish
+    Then I will be in the Finish Page
+    And the header will say THANK YOU FOR YOUR ORDER
+    And the text will say Your order has been dispatched, and will arrive just as fast as the pony can get there!
 
 
   @end @now

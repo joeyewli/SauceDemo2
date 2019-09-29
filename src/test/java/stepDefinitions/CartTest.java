@@ -22,7 +22,6 @@ public class CartTest extends BasePage {
 
     @When("I click on Continue Shopping button")
     public void i_click_on_Continue_Shopping_button() {
-        // Write code here that turns the phrase above into concrete actions
         cartPage.clickContinueShopping();
     }
 

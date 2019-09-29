@@ -6,9 +6,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.bytebuddy.implementation.bytecode.Throw;
-import pageObjects.CheckoutOverviewPage;
-import pageObjects.CheckoutPage;
-import pageObjects.InventoryPage;
+import pageObjects.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,16 +15,24 @@ public class CheckoutTest extends BasePage {
     private CheckoutPage checkoutPage;
     private CheckoutOverviewPage checkoutOverviewPage;
     private InventoryPage inventoryPage;
+    private FinishPage finishPage;
+    private HeaderPage headerPage;
+    private FooterPage footerPage;
+
     @Before("@checkout")
     public void setUpLoginPage() throws Throwable {
 //        System.out.println("Set up cart page");
         initialization();
         checkoutPage = new CheckoutPage();
+        headerPage = new HeaderPage();
+        footerPage = new FooterPage();
+
     }
 
     @After(value = "@emptyCartCheckoutOverview", order = 101)
     public void emptyCartFromCheckoutOverview() {
-        inventoryPage = checkoutOverviewPage.pressCancel();
+//        inventoryPage = checkoutOverviewPage.pressCancel();
+        inventoryPage = headerPage.goToInventoryPage();
     }
 
     @Then("I will be in the Checkout: Your Information page")
@@ -75,5 +81,26 @@ public class CheckoutTest extends BasePage {
     @Then("Total = Tax and Item Total")
     public void total_Tax_and_Item_Total() throws Throwable {
         assertEquals(checkoutOverviewPage.getItemTotal() + checkoutOverviewPage.getTax(), checkoutOverviewPage.getTotal(), 0.01);
+    }
+
+
+    @When("I click Finish")
+    public void i_click_Finish() throws Throwable {
+        finishPage = checkoutOverviewPage.pressFinish();
+    }
+
+    @Then("I will be in the Finish Page")
+    public void i_will_be_in_the_Finish_Page() throws Throwable {
+        assertEquals("Finish", finishPage.getTitle());
+    }
+
+    @Then("the header will say (.*)")
+    public void the_header_will_say(String header) throws Throwable {
+        assertEquals(header, finishPage.getHeader());
+    }
+
+    @Then("the text will say (.*)")
+    public void the_text_will_say(String text) throws Throwable {
+        assertEquals(text, finishPage.getText());
     }
 }

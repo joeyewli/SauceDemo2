@@ -12,6 +12,10 @@ public class HeaderPage extends BasePage {
     //    @FindBy(xpath = "//*[@class='inventory_list']/child::div//*[contains(@class,'add-to-cart-button')]")
     @FindBy(className = "shopping_cart_container")
     private WebElement cartIcon;
+    @FindBy(className = "bm-burger-button")
+    private WebElement menuTab;
+    @FindBy(xpath = "//*[text() ='All Items']")
+    private WebElement allItemsLink;
 
     public HeaderPage() {
         PageFactory.initElements(driver, this);
@@ -31,5 +35,11 @@ public class HeaderPage extends BasePage {
     public CartPage clickOnCartIcon() {
         cartIcon.click();
         return new CartPage();
+    }
+
+    public InventoryPage goToInventoryPage() {
+        menuTab.click();
+        allItemsLink.click();
+        return new InventoryPage();
     }
 }

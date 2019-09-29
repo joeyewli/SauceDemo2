@@ -50,7 +50,7 @@ public class CheckoutOverviewPage extends BasePage {
         for (WebElement item : inventoryPrice) {
             sum += Double.parseDouble(item.getText().substring(position));
         }
-        System.out.println("SUM = " + sum);
+//        System.out.println("SUM = " + sum);
         return sum;
     }
 
@@ -77,7 +77,8 @@ public class CheckoutOverviewPage extends BasePage {
         return new InventoryPage();
     }
 
-    public void pressFinish() {
+    public FinishPage pressFinish() {
         finishBtn.click();
+        return new FinishPage();
     }
 }
